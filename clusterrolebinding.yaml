@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+subjects:
+- kind: ServiceAccount
+  name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+  namespace: default # {"$ref":"#/definitions/io.k8s.cli.setters.namespace"}

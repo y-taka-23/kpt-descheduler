@@ -1,0 +1,39 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+spec:
+  schedule: "*/2 * * * *" # {"$ref":"#/definitions/io.k8s.cli.setters.schedule"}
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+        spec:
+          priorityClassName: system-cluster-critical
+          serviceAccountName: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
+          restartPolicy: Never
+          containers:
+          - name: descheduler
+            image: us.gcr.io/k8s-artifacts-prod/descheduler/descheduler:v0.18.0 # {"$ref":"#/definitions/io.k8s.cli.substitutions.image"}
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/descheduler
+            - --policy-config-file
+            - /policy-dir/deschedulingpolicy.yaml
+            args:
+            - --v=2 # {"$ref":"#/definitions/io.k8s.cli.substitutions.verbosity"}
+            - --evict-local-storage-pods=false # {"$ref":"#/definitions/io.k8s.cli.substitutions.evict-local-storage-pods"}
+            - --max-pods-to-evict-per-node=10 # {"$ref":"#/definitions/io.k8s.cli.substitutions.max-pods-to-evict-per-node"}
+            # TODO: Due to Kpt's empty setter problem,
+            # currentry the --node-selector option cannot be templatized
+            # See https://github.com/GoogleContainerTools/kpt/issues/721
+            #- --node-selector=
+            volumeMounts:
+            - mountPath: /policy-dir
+              name: policy-volume
+          volumes:
+          - name: policy-volume
+            configMap:
+              name: deschedulingpolicy

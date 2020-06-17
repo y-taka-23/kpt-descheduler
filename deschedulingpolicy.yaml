@@ -1,0 +1,40 @@
+apiVersion: descheduler/v1alpha1
+kind: DeschedulerPolicy
+strategies:
+  RemoveDuplicates:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-duplicates-enabled"}
+    params:
+      removeDuplicates:
+        excludeOwnerKinds: # {"$ref":"#/definitions/io.k8s.cli.setters.policy-duplicates-owner-kinds"}
+        - "ReplicaSet"
+  LowNodeUtilization:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-enabled"}
+    params:
+      nodeResourceUtilizationThresholds:
+        thresholds:
+          cpu: 20 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-threshold-cpu"}
+          memory: 20 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-threshold-memory"}
+          pods: 20 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-threshold-pods"}
+        targetThresholds:
+          cpu: 50 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-target-cpu"}
+          memory: 50 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-target-memory"}
+          pods: 50 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-utilization-target-pods"}
+  RemovePodsViolatingInterPodAntiAffinity:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-pod-anti-affinity-enabled"}
+  RemovePodsViolatingNodeAffinity:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-node-affinity-enabled"}
+    params:
+      nodeAffinityType: # {"$ref":"#/definitions/io.k8s.cli.setters.policy-node-affinity-type"}
+      - "requiredDuringSchedulingIgnoredDuringExecution"
+  RemovePodsViolatingNodeTaints:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-node-taints-enabled"}
+  RemovePodsHavingTooManyRestarts:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-many-restarts-enabled"}
+    params:
+      podsHavingTooManyRestarts:
+        podRestartThreshold: 100 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-many-restarts-threshold"}
+        includingInitContainers: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-many-restarts-init-containers"}
+  PodLifeTime:
+    enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-pod-life-time-enabled"}
+    params:
+      maxPodLifeTimeSeconds: 86400 # {"$ref":"#/definitions/io.k8s.cli.setters.policy-pod-life-time-seconds"}

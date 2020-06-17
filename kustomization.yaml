@@ -1,0 +1,10 @@
+resources:
+- serviceaccount.yaml
+- clusterrole.yaml
+- clusterrolebinding.yaml
+- cronjob.yaml
+
+configMapGenerator:
+- name: deschedulingpolicy
+  files:
+   - deschedulingpolicy.yaml
