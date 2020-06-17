@@ -9,4 +9,3 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
-  namespace: default # {"$ref":"#/definitions/io.k8s.cli.setters.namespace"}
