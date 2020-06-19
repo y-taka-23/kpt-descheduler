@@ -9,6 +9,7 @@ resources:
 - clusterrole.yaml
 - clusterrolebinding.yaml
 - cronjob.yaml
+- inventory-template.yaml
 configMapGenerator:
 - name: deschedulingpolicy
   files:
