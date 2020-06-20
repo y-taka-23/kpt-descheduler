@@ -7,18 +7,21 @@ packageMetadata:
 openAPI:
   definitions:
     io.k8s.cli.setters.name:
+      type: string
       x-k8s-cli:
         setter:
           name: name
           value: descheduler
           setBy: package-default
     io.k8s.cli.setters.repository:
+      type: string
       x-k8s-cli:
         setter:
           name: repository
           value: us.gcr.io/k8s-artifacts-prod/descheduler/descheduler
           setBy: package-default
     io.k8s.cli.setters.tag:
+      type: string
       x-k8s-cli:
         setter:
           name: tag
@@ -35,6 +38,7 @@ openAPI:
           - marker: TAG
             ref: '#/definitions/io.k8s.cli.setters.tag'
     io.k8s.cli.setters.option-verbosity:
+      type: integer
       x-k8s-cli:
         setter:
           name: option-verbosity
@@ -49,6 +53,7 @@ openAPI:
           - marker: N
             ref: '#/definitions/io.k8s.cli.setters.option-verbosity'
     io.k8s.cli.setters.option-evict-local-storage-pods:
+      type: boolean
       x-k8s-cli:
         setter:
           name: option-evict-local-storage-pods
@@ -63,6 +68,7 @@ openAPI:
           - marker: BOOL
             ref: '#/definitions/io.k8s.cli.setters.option-evict-local-storage-pods'
     io.k8s.cli.setters.option-max-pods-to-evict-per-node:
+      type: integer
       x-k8s-cli:
         setter:
           name: option-max-pods-to-evict-per-node
@@ -76,13 +82,30 @@ openAPI:
           values:
           - marker: N
             ref: '#/definitions/io.k8s.cli.setters.option-max-pods-to-evict-per-node'
+    io.k8s.cli.setters.option-node-selector:
+      type: string
+      x-k8s-cli:
+        setter:
+          name: option-node-selector
+          value: ""
+          setBy: package-default
+    io.k8s.cli.substitutions.node-selector:
+      x-k8s-cli:
+        substitution:
+          name: node-selector
+          pattern: --node-selector=KEY1=VAL1,KEY2=VAL2
+          values:
+          - marker: KEY1=VAL1,KEY2=VAL2
+            ref: '#/definitions/io.k8s.cli.setters.option-node-selector'
     io.k8s.cli.setters.schedule:
+      type: string
       x-k8s-cli:
         setter:
           name: schedule
           value: "*/2 * * * *"
           setBy: package-default
     io.k8s.cli.setters.policy-duplicates-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-duplicates-enabled
@@ -97,54 +120,63 @@ openAPI:
           - "ReplicaSet"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-utilization-enabled
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-threshold-cpu:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-cpu
           value: "20"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-threshold-memory:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-memory
           value: "20"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-threshold-pods:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-pods
           value: "20"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-target-cpu:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-target-cpu
           value: "50"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-target-memory:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-target-memory
           value: "50"
           setBy: package-default
     io.k8s.cli.setters.policy-utilization-target-pods:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-utilization-target-pods
           value: "50"
           setBy: package-default
     io.k8s.cli.setters.policy-pod-anti-affinity-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-pod-anti-affinity-enabled
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-node-affinity-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-node-affinity-enabled
@@ -159,36 +191,42 @@ openAPI:
           - requiredDuringSchedulingIgnoredDuringExecution
           setBy: package-default
     io.k8s.cli.setters.policy-node-taints-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-pod-node-taints-enabled
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-many-restarts-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-many-restarts-enabled
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-many-restarts-threshold:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-many-restarts-threshold
           value: "100"
           setBy: package-default
     io.k8s.cli.setters.policy-many-restarts-init-containers:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-many-restarts-init-containers
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-pod-life-time-enabled:
+      type: boolean
       x-k8s-cli:
         setter:
           name: policy-pod-life-time-enabled
           value: "true"
           setBy: package-default
     io.k8s.cli.setters.policy-pod-life-time-seconds:
+      type: integer
       x-k8s-cli:
         setter:
           name: policy-pod-life-time-seconds

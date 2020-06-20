@@ -26,10 +26,7 @@ spec:
             - --v=2 # {"$ref":"#/definitions/io.k8s.cli.substitutions.verbosity"}
             - --evict-local-storage-pods=false # {"$ref":"#/definitions/io.k8s.cli.substitutions.evict-local-storage-pods"}
             - --max-pods-to-evict-per-node=10 # {"$ref":"#/definitions/io.k8s.cli.substitutions.max-pods-to-evict-per-node"}
-            # TODO: Due to Kpt's empty setter problem,
-            # currentry the --node-selector option cannot be templatized
-            # See https://github.com/GoogleContainerTools/kpt/issues/721
-            #- --node-selector=
+            - --node-selector= # {"$ref":"#/definitions/io.k8s.cli.substitutions.node-selector"}
             volumeMounts:
             - mountPath: /policy-dir
               name: policy-volume
