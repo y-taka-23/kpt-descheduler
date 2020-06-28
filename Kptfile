@@ -140,6 +140,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-threshold-cpu:
       description: cpu min percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-cpu
@@ -148,6 +149,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-threshold-memory:
       description: memory min percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-memory
@@ -156,6 +158,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-threshold-pods:
       description: pod-count min percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-threshold-pods
@@ -164,6 +167,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-target-cpu:
       description: cpu max percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-target-cpu
@@ -172,6 +176,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-target-memory:
       description: memory max percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-target-memory
@@ -180,6 +185,7 @@ openAPI:
     io.k8s.cli.setters.policy-utilization-target-pods:
       description: pod-count max percentage of LowNodeUtilization
       type: integer
+      maximum: 100
       x-k8s-cli:
         setter:
           name: policy-utilization-target-pods
