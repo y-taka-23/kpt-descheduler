@@ -5,12 +5,12 @@ commonLabels:
   app.kubernetes.io/name: descheduler # {"$ref":"#/definitions/io.k8s.cli.setters.name"}
   app.kubernetes.io/managed-by: kpt
 resources:
-- serviceaccount.yaml
-- clusterrole.yaml
-- clusterrolebinding.yaml
-- cronjob.yaml
+- resource/serviceaccount.yaml
+- resource/clusterrole.yaml
+- resource/clusterrolebinding.yaml
+- resource/cronjob.yaml
 - inventory-template.yaml
 configMapGenerator:
 - name: deschedulingpolicy
   files:
-   - deschedulingpolicy.yaml
+   - resource/deschedulingpolicy.yaml

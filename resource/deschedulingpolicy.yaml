@@ -1,5 +1,7 @@
 apiVersion: descheduler/v1alpha1
 kind: DeschedulerPolicy
+metadata:
+  name: policy
 strategies:
   RemoveDuplicates:
     enabled: true # {"$ref":"#/definitions/io.k8s.cli.setters.policy-duplicates-enabled"}

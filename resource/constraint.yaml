@@ -1,0 +1,47 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: validutilizationthresholds
+spec:
+  crd:
+    spec:
+      names:
+        kind: ValidUtilizationThresholds
+      validation:
+        openAPIV3Schema:
+          properties:
+            resouces:
+              type: array
+  targets:
+  - target: admission.k8s.gatekeeper.sh
+    rego: |-
+      package valid_util_thresholds
+      violation[{"msg": sprintf("%v", [msg])}] {
+        resource = input.parameters.resources[_]
+        strategies = input.review.object.strategies
+        util = strategies.LowNodeUtilization.params.nodeResourceUtilizationThresholds
+        threshold = util.thresholds[resource]
+        target_threshold = util.targetThresholds[resource]
+        threshold > target_threshold
+        msg := sprintf(
+          "LowNodeUtilization: %v: threshold %v exceeds the target threshold %v",
+          [resource, threshold, target_threshold]
+        )
+      }
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: ValidUtilizationThresholds
+metadata:
+  name: valid-utilization-thresholds
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - descheduler
+      kinds:
+      - DeschedulerPolicy
+  parameters:
+    resources:
+    - cpu
+    - memory
+    - pods
